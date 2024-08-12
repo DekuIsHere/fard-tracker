@@ -1,0 +1,48 @@
+/*background colour*/
+body {
+    background-color: #290750;
+  }
+/*makes the navbar horizontal*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #290750;
+    display: flex;
+    align-items: center;
+}
+
+li {
+    float: left;
+    padding: 0;
+    margin-right: 20px;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+li a img {
+    vertical-align: middle;
+}
+
+li a h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+li a:hover {
+    background-color: #18042f;
+}
+
+.active img {
+    width: 200px;
+    height: 100px;
+}
