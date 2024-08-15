@@ -3,46 +3,35 @@ body {
     background-color: #290750;
   }
 /*makes the navbar horizontal*/
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #290750;
+    padding: 10px 0;
+}
 ul {
     list-style-type: none;
-    margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #290750;
+    margin: 0;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    background-color: #290750;
 }
-
 li {
-    float: left;
-    padding: 0;
-    margin-right: 20px;
+    margin: 0 15px;
 }
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
+a {
     text-decoration: none;
-}
-
-li a img {
-    vertical-align: middle;
-}
-
-li a h1 {
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
     color: white;
 }
-
-li a:hover {
-    background-color: #18042f;
+.active {
+    font-weight: bold;
 }
-
-.active img {
-    width: 200px;
-    height: 100px;
+.timer {
+    font-size: 2em;
+    margin-top: 20px;
 }

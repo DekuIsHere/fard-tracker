@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Shop Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #290750;
+            padding: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #290750;
+        }
+        li {
+            margin: 0 15px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        .active {
+            font-weight: bold;
+        }
+        .timer {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!--navigation bar-->
+        <ul>
+            <li>
+                <a class="active" href="index.html"><img src='Images/logo.png' style="width:200px;height:100px;" alt="Logo"></a>
+            </li>
+            <li>
+                <a href="itemshop.html"><h1>Todays Item Shop</h1></a>
+            </li>
+            <li>
+                <a href="reminders.html"><h1>Reminders</h1></a>
+            </li>
+            <li>
+                <a href="about.html"><h1>About Us</h1></a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h1>Item Shop Changes In</h1>
+        <div id="timer" class="timer">Loading...</div>
+    </main>
+
+    <script>
+        function getNextResetTime() {
+            const now = new Date();
+            const nzOffset = now.getTimezoneOffset() + (now.getTimezoneOffset() > 720 ? -720 : 720);
+            const nzTime = new Date(now.getTime() + nzOffset * 60000);
+            const isDaylightSaving = nzTime.getTimezoneOffset() < now.getTimezoneOffset();
+            let nextResetTime = new Date(nzTime);
+
+            // Reset times
+            const resetHour = isDaylightSaving ? 13 : 12; // 1 PM for DST, 12 PM otherwise
+
+            nextResetTime.setHours(resetHour, 0, 0, 0);
+
+            // If the next reset time is in the past, set it to the next day
+            if (nextResetTime <= nzTime) {
+                nextResetTime.setDate(nextResetTime.getDate() + 1);
+            }
+
+            return nextResetTime;
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const nextResetTime = getNextResetTime();
+            const timeDifference = nextResetTime - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('timer').innerText = 'Reset Now';
+                return;
+            }
+
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+            setTimeout(updateTimer, 1000);
+        }
+
+        // Start the timer
+        updateTimer();
+    </script>
+</body>
+</html>
