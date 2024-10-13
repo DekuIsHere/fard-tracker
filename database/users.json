@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "username": "john_doe",
+    "password": "hashed_password_here"
+  },
+  {
+    "id": 2,
+    "username": "test",
+    "password": "$2a$10$X.uj4GB8RHW7uoktHMMTt.tBV5O47xxNRYo.hs/HtKDM3hoGL/eh."
+  },
+  {
+    "id": 3,
+    "username": "josh",
+    "password": "$2a$10$nWRofQSsmFUGob32NN9i0.ZJsMsVlDdn0e3Xpx9pGFnsM.Jfbfsh6"
+  },
+  {
+    "id": 4,
+    "username": "Josh",
+    "password": "$2a$10$iEj74Tob5rpxiXrKPYGw6uk8lQL0HUnPAoYghnSk84gL2tLmcmxsm"
+  },
+  {
+    "id": 5,
+    "username": "Test",
+    "password": "$2a$10$aHhorB1UIj.sXx2x9vpFGOPeo3ILx3gyBpKBRyHzpkd4dn/ZhYDTq"
+  }
+]

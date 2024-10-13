@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Item Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #290750; /* Set the background color to match your theme */
+            color: white; /* Set text color to white for readability */
+        }
+        /* Navigation Bar Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #1a0045; /* Darker background for navigation */
+        }
+        li {
+            margin: 0 20px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #ffd700; /* Highlight color on hover */
+        }
+        .active {
+            font-weight: bold; /* Make active link bold */
+        }
+        .item-set {
+            margin: 30px 0;
+            background-color: rgba(255, 255, 255, 0.1); /* Light translucent background for item sets */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners for a modern look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+        .item {
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light border to match the theme */
+            padding: 10px;
+            width: 120px;
+            border-radius: 5px; /* Slightly rounded corners for items */
+        }
+        .item img {
+            width: 100%;
+            border-radius: 5px; /* Match item images to the item card */
+        }
+        .timer {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <ul>
+        <li>
+            <a class="active" href="index.html"><img src='Images/logo.png' style="width:200px;height:100px;"></a>
+        </li>
+        <li>
+            <a href="itemshop.html"><h1>Todays Item Shop</h1></a>
+        </li>
+        <li>
+            <a href="reminders.html"><h1>Reminders</h1></a>
+        </li>
+        <li>
+            <a href="about.html"><h1>About Us</h1></a>
+        </li>
+        <li>
+            <a href="login.html"><h1>Login</h1></a>
+        </li>
+        <li>
+            <a href="signup.html"><h1>Sign Up</h1></a>
+        </li>
+    </ul>
+
+    <header>
+        <h1>Today's Item Shop</h1>
+    </header>
+    <main>
+        <h2>Item Shop Changes In</h2>
+        <div id="timer" class="timer">Loading...</div>
+    </main>
+
+    
+    <script>
+        function getNextResetTime() {
+            const now = new Date();
+            const nzOffset = now.getTimezoneOffset() + (now.getTimezoneOffset() > 720 ? -720 : 720);
+            const nzTime = new Date(now.getTime() + nzOffset * 60000);
+            const isDaylightSaving = nzTime.getTimezoneOffset() < now.getTimezoneOffset();
+            let nextResetTime = new Date(nzTime);
+
+            // Reset times
+            const resetHour = isDaylightSaving ? 13 : 12; // 1 PM for DST, 12 PM otherwise
+
+            nextResetTime.setHours(resetHour, 0, 0, 0);
+
+            // If the next reset time is in the past, set it to the next day
+            if (nextResetTime <= nzTime) {
+                nextResetTime.setDate(nextResetTime.getDate() + 1);
+            }
+
+            return nextResetTime;
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const nextResetTime = getNextResetTime();
+            const timeDifference = nextResetTime - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('timer').innerText = 'Reset Now';
+                return;
+            }
+
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+            setTimeout(updateTimer, 1000);
+        }
+
+        // Start the timer
+        updateTimer();
+    </script>
+        <!-- Item Sets -->
+        <div class="item-set">
+            <h3>Mephisto</h3>
+            <div class="item">
+                <img src="shopimages/Mephisto.jpg" alt="Item 1">
+                <h4> Mephisto</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/demonhand.jpg" alt="Item 2">
+                <h4>Demon's Hand</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/hellfireflare.jpg" alt="Item 3">
+                <h4>Hellfire Flare</h4>
+                <p>500 V-Bucks</p>
+            </div>
+        </div>
+        
+        <div class="item-set">
+            <h3>The Nightmare Before Christmas</h3>
+            <div class="item">
+                <img src="shopimages/kingsparadehorse.jpg" alt="Item 4">
+                <h4>King's Parade Horse</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/pumpkinking.jpg" alt="Item 5">
+                <h4>Item 5</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/Sally.jpg" alt="Item 6">
+                <h4>Item 6</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/SallysSoupLadle.jpg" alt="Item 6">
+                <h4>Item 6</h4>
+                <p>800 V-Bucks</p>
+            </div>
+        </div>
+
+        <div class="item-set">
+            <h3>Billy</h3>
+            <div class="item">
+                <img src="shopimages/billy.jpg" alt="Item 4">
+                <h4>Billy</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/puppetschoice.jpg" alt="Item 5">
+                <h4>Puppet's Choice</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/spiralizedslicer.jpg" alt="Item 6">
+                <h4>Spiralized Slicer</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/billystricycle.jpg" alt="Item 6">
+                <h4>Billy's Tricycle</h4>
+                <p>800 V-Bucks</p>
+            </div>
+        </div>
+        <div class="item-set">
+            <h3>Deadpool Mashups</h3>
+            <div class="item">
+                <img src="shopimages/chimichanga.jpg" alt="Item 4">
+                <h4>Chimichanga!</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/cuddlepool.jpg" alt="Item 5">
+                <h4>Cuddlepool</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/deadpoolgear.jpg" alt="Item 6">
+                <h4>Deadpool Gear (Bundle)</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/deadpoolmashups.jpg" alt="Item 6">
+                <h4>Deadpool Mashups (Bundle)</h4>
+                <p>2000 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/dragacorn.jpg" alt="Item 4">
+                <h4>Dragacorn</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/meatymallet.jpg" alt="Item 5">
+                <h4>Meaty Mallets</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/ravenpool.jpg" alt="Item 6">
+                <h4>Ravenpool</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/scootin.jpg" alt="Item 6">
+                <h4>Scootin'</h4>
+                <p>500 V-Bucks</p>
+            </div>
+        </div>
+        <div class="item-set">
+            <h3>Creepy Outfits</h3>
+            <div class="item">
+                <img src="shopimages/shadowmidas.jpg" alt="Item 4">
+                <h4>Shadow Midas</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/babayaga.jpg" alt="Item 5">
+                <h4>Baba Yaga</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/bogstick.jpg" alt="Item 6">
+                <h4>Bogstick</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/festival.jpg" alt="Item 6">
+                <h4>Festival Phaedra</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/headlock.jpg" alt="Item 4">
+                <h4>Headlock</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/skeletara.jpg" alt="Item 5">
+                <h4>skeletara</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/spellsweeper.jpg" alt="Item 6">
+                <h4>Spellsweeper</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/theaxeray.jpg" alt="Item 6">
+                <h4>The Axe-Ray</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/jaw.jpg" alt="Item 4">
+                <h4>Jaw Droper</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/khopesh.jpg" alt="Item 5">
+                <h4>King's Khopesh</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/seth.jpg" alt="Item 6">
+                <h4>Seth</h4>
+                <p>1200 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/wrapped.jpg" alt="Item 6">
+                <h4>Wrapped</h4>
+                <p>300 V-Bucks</p>
+            </div>
+        </div>
+        <div class="item-set">
+            <h3>Karol G</h3>
+            <div class="item">
+                <img src="shopimages/icon_256_png.jpg" alt="Item 4">
+                <h4>Bonito</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/cairo.png" alt="Item 5">
+                <h4>Cairo</h4>
+                <p>500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/carolina.jpg" alt="Item 4">
+                <h4>Carolina</h4>
+                <p>1500 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/msb mic.jpg" alt="Item 5">
+                <h4>Item 5</h4>
+                <p>800 V-Bucks</p>
+            </div>
+            <div class="item">
+                <img src="shopimages/okidoki.jpg" alt="Item 4">
+                <h4>Oki Doki</h4>
+                <p>500 V-Bucks</p>
+            </div>
